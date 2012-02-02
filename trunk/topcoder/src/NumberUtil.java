@@ -10,6 +10,76 @@ public class NumberUtil {
 		System.out.println(convertDec2Roman(981));
 	}
 
+	//UCLN  (BCNN a, b = a*b/UCLN)
+    int gcb(int a, int b) {
+    	return (b != 0)? gcb(b, a%b) : a;
+    }
+
+	//Multiple number with 0-9
+    static String mutilpt(String num, int a) {
+    	if (a == 0) return "0";
+    	String numT = num;
+    	char[] arr = numT.toCharArray();
+    	int remain = 0;
+    	for (int i = arr.length-1; i >= 0; i--) {
+    		int tem = (arr[i]-'0') * a + remain;
+			if (tem > 9) {
+				arr[i] = (char)(tem%10 + '0');
+				remain = tem/10;
+			} else {
+				arr[i] = (char)(tem + '0');
+			}
+		}
+    	if (remain == 0)
+    		return String.valueOf(arr);
+    	else {
+    		return String.valueOf(remain) + String.valueOf(arr); 
+    	}
+    }
+	
+	//Subtract number with 0-9
+    static String subtract(String num, int sub) {
+    	String numT = num;
+    	char[] arr = numT.toCharArray();
+    	
+    	for (int i = arr.length-1; i >= 0; i--) {
+    		if (sub == 0) break;
+    		int tem = (arr[i]-'0' - sub);
+			if (tem < 0) {
+				arr[i] = (char)(tem + 10 + '0');				
+				sub = 1;
+			} else {
+				arr[i] = (char)(arr[i] - sub);
+				sub = 0;
+			}
+		}
+    	return String.valueOf(arr);
+    }
+	
+	//Add a number with 0-9
+    static String add(String num, int add) {
+    	String numT = num;
+    	char[] arr = numT.toCharArray();
+    	
+    	for (int i = arr.length-1; i >= 0; i--) {
+    		if (add == 0) break;
+    		int tem = (arr[i]-'0' + add);
+			if (tem > 9) {
+				arr[i] = (char)(tem - 10 + '0');				
+				add = tem/10;
+			} else {
+				arr[i] = (char)(arr[i] + add);
+				add = 0;
+			}
+		}
+    	
+    	if (add == 0)
+    		return String.valueOf(arr);
+    	else {
+    		return String.valueOf(add) + String.valueOf(arr); 
+    	}
+    }	
+	
 	// Check is Prime or not
 	boolean isPrime(long n) {
         boolean res = true;
