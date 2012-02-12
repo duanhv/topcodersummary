@@ -10,6 +10,16 @@ public class NumberUtil {
 		System.out.println(convertDec2Roman(981));
 	}
 
+	//For series with radix 4
+	public static void radix() {
+		int res = 0;
+		while (Integer.valueOf(Integer.toString(res, 4)) < 10000) {
+			res ++;
+			System.out.println(Integer.valueOf(Integer.toString(res, 4)));
+		}
+		System.out.println(res);
+	}
+	
 	//UCLN  (BCNN a, b = a*b/UCLN)
     int gcb(int a, int b) {
     	return (b != 0)? gcb(b, a%b) : a;
