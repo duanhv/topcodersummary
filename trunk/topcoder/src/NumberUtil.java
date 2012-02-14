@@ -134,5 +134,45 @@ public class NumberUtil {
 		}
 		return roman;
 	}
-	
+
+	// Area for Triangle with 3 points    
+    double area(long[] A, long[] B, long[] C) { // Point "x y z: 0 1 2"
+
+        long dx1 = A[0] - B[0];
+        long dy1 = A[1] - B[1];
+        long dz1 = A[2] - B[2];
+        long dx2 = C[0] - B[0];
+        long dy2 = C[1] - B[1];
+        long dz2 = C[2] - B[2];            
+        long len = (dx1 * dy2 - dx2 * dy1) * (dx1 * dy2 - dx2 * dy1);
+        len += (dx1 * dz2 - dx2 * dz1) * (dx1 * dz2 - dx2 * dz1);
+        len += (dz1 * dy2 - dz2 * dy1) * (dz1 * dy2 - dz2 * dy1);
+
+    	return Math.sqrt((double)len) / 2.;
+    }
+    long area2(long[] A, long[] B, long[] C) { // Point "x y z: 0 1 2"
+
+        long dx1 = A[0] - B[0];
+        long dy1 = A[1] - B[1];
+        long dz1 = A[2] - B[2];
+        long dx2 = C[0] - B[0];
+        long dy2 = C[1] - B[1];
+        long dz2 = C[2] - B[2];            
+        long len = (dx1 * dy2 - dx2 * dy1) * (dx1 * dy2 - dx2 * dy1);
+        len += (dx1 * dz2 - dx2 * dz1) * (dx1 * dz2 - dx2 * dz1);
+        len += (dz1 * dy2 - dz2 * dy1) * (dz1 * dy2 - dz2 * dy1);
+    	return len;
+    }
+ // Area for Triangle with 2 points   
+    double area(String p1, String p2, String p3) { // Point "x y"
+    	double res = 0;
+    	String[] A = p1.split(" ");
+    	String[] B = p2.split(" ");
+    	String[] C = p3.split(" ");    	
+    	
+    	res = 0.5* Math.abs(((Integer.valueOf(C[0])-Integer.valueOf(A[0]))*(Integer.valueOf(B[1])-Integer.valueOf(A[1])) -
+    			(Integer.valueOf(B[0])-Integer.valueOf(A[0]))*(Integer.valueOf(C[1])-Integer.valueOf(A[1]))));
+    	
+    	return res;
+    }
 }
