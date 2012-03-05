@@ -20,7 +20,7 @@ public class NumberUtil {
 		System.out.println(res);
 	}
 	
-	//UCLN  (BCNN a, b = a*b/UCLN)
+	//UCLN  (BCNN a, b = a/UCLN*b)
     int gcb(int a, int b) {
     	return (b != 0)? gcb(b, a%b) : a;
     }
@@ -136,7 +136,7 @@ public class NumberUtil {
 	}
 
 	// Area for Triangle with 3 points    
-    double area(long[] A, long[] B, long[] C) { // Point "x y z: 0 1 2"
+    double area(long[] A, long[] B, long[] C) { // Point A, B, C: x y z: 0 1 2"
 
         long dx1 = A[0] - B[0];
         long dy1 = A[1] - B[1];
@@ -150,7 +150,7 @@ public class NumberUtil {
 
     	return Math.sqrt((double)len) / 2.;
     }
-    long area2(long[] A, long[] B, long[] C) { // Point "x y z: 0 1 2"
+    long area2(long[] A, long[] B, long[] C) { // Point A, B, C: "x y z: 0 1 2"
 
         long dx1 = A[0] - B[0];
         long dy1 = A[1] - B[1];
@@ -163,7 +163,7 @@ public class NumberUtil {
         len += (dz1 * dy2 - dz2 * dy1) * (dz1 * dy2 - dz2 * dy1);
     	return len;
     }
- // Area for Triangle with 2 points   
+    // Area for Triangle with 2 points   
     double area(String p1, String p2, String p3) { // Point "x y"
     	double res = 0;
     	String[] A = p1.split(" ");
