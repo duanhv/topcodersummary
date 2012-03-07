@@ -24,7 +24,17 @@ public class NumberUtil {
     int gcb(int a, int b) {
     	return (b != 0)? gcb(b, a%b) : a;
     }
-
+    //Exclusive recursion
+	long gcd(long a, long b) {
+		while (b != 0) {
+			long c = b;
+			b = a % b;
+			a = c;
+		}
+		return a;
+	}
+    
+    
 	//Multiple number with 0-9
     static String mutilpt(String num, int a) {
     	if (a == 0) return "0";
