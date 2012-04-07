@@ -21,7 +21,7 @@ public class NumberUtil {
 	}
 	
 	//UCLN  (BCNN a, b = a/UCLN*b)
-    int gcb(int a, int b) {
+    long gcb(long a, long b) {
     	return (b != 0)? gcb(b, a%b) : a;
     }
     //Exclusive recursion
@@ -33,7 +33,6 @@ public class NumberUtil {
 		}
 		return a;
 	}
-    
     
 	//Multiple number with 0-9
     static String mutilpt(String num, int a) {
