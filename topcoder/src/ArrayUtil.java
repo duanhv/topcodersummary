@@ -11,6 +11,10 @@ public class ArrayUtil {
 
 	}
 
+	static int[] xs = {1,-1,0,0};
+	static int[] ys = {0,0,-1,1};
+		
+	
 	// Sort in DESC
 	static int[] sortInDESC(int[] input) {
 		int[] arr = input.clone();
