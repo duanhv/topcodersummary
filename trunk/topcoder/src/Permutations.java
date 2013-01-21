@@ -60,11 +60,31 @@ public class Permutations {
 
 
     public static void main(String[] args) {
-       int N = 8;
+       int N = 4;
        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
        String elements = alphabet.substring(0, N);
        perm1(elements);
        System.out.println();
        //perm2(elements);
     }
+
+	/**
+	 * Loop all from 0001 to 1111 to determine the current element is 0/1
+	 * Dung cho bài toán chỉnh hợp/tổ hợp, lấy 1 hay 2,3... phần tử trong 1 tập 
+	 */
+	public static void loopAllBinaryToCheckGetOrNot() {
+		int[] b = {1, 2, 3, 4};
+		// mask: 0001 -> 1111
+		for (int mask = 1; mask < 1<<b.length ; mask++) {
+			System.out.println(Integer.toBinaryString(mask));
+			for (int i = 0; i < b.length; i++) { // can extend to any integer
+				if ((mask & (1<<i)) != 0) {
+					System.out.println(mask + ": element " + i + " is  1");
+					// process here!
+				}
+			}
+			System.out.println("============");
+		}
+	}
+    
 }
