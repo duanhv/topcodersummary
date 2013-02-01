@@ -8,10 +8,19 @@ public class NumberUtil {
 		// TODO Auto-generated method stub
 		// System.out.println(convertRoman2Dec("CMLXIXVIVIII"));
 		// System.out.println(convertDec2Roman(981));
-		System.out.println(convertToAotherBase(255, 2));
-		System.out.println(convertToBase10(11111111, 2));
+		System.out.println(convertToAotherBase(99, 17));
+		//System.out.println(convertToBase10(11111111, 2));
 	}
 
+	
+    public static String convertToAotherBaseMax32(int num, int base) {
+        String string = new String();
+        while(num>0) {
+            string = "0123456789ABCDEFGHIJKLMNOPQRSTVW".charAt(num%base) + string;
+            num = num/base;
+        }
+        return string;
+    }
 	private static int convertToAotherBase(int x, int a) { // from 10 base to another
 		int res = 0;
 		res = Integer.valueOf(Integer.toString(x, a));
