@@ -6,10 +6,28 @@ public class NumberUtil {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(convertRoman2Dec("CMLXIXVIVIII"));
-		System.out.println(convertDec2Roman(981));
+		// System.out.println(convertRoman2Dec("CMLXIXVIVIII"));
+		// System.out.println(convertDec2Roman(981));
+		System.out.println(convertToAotherBase(255, 2));
+		System.out.println(convertToBase10(11111111, 2));
 	}
 
+	private static int convertToAotherBase(int x, int a) { // from 10 base to another
+		int res = 0;
+		res = Integer.valueOf(Integer.toString(x, a));
+		return res;
+	}
+	
+	private static int convertToBase10(int x, int a) { // mumber x in base a
+		int res = 0;
+		char[] arr = String.valueOf(x).toCharArray();
+		int N = arr.length;
+		for (int i = 0; i < N; i++) {
+			res += (arr[i]-'0')*Math.pow(a, N-i-1);
+		}
+		return res;
+	}
+	
 	//For series with radix 4
 	public static void radix() {
 		int res = 0;
