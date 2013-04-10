@@ -17,6 +17,7 @@ package org.springframework.social.showcase.config;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import com.mysql.jdbc.Driver;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
