@@ -23,7 +23,6 @@ public class AccountRepoImpl
 		setSessionFactory(sessionFactory);
 	}
 
-	@Transactional
 	public void createAccount(Account user) throws UsernameAlreadyInUseException {
 		try {
 			getHibernateTemplate().save(user);

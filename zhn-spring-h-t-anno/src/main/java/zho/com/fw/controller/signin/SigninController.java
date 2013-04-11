@@ -14,7 +14,7 @@ public class SigninController {
 	@RequestMapping(value="/signin", method=RequestMethod.GET)
 	public void signin() {
 		
-		System.out.println("signin - blank");
+		System.out.println("signin - blank: " + this);
 		
 	}
 }

@@ -31,6 +31,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) throws Exception {
+		System.out.println("Test HomeController: " + this);
 		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
 		model.addAttribute(accountService.findAccountByUsername(currentUser.getName()));
 		return "home";

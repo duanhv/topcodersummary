@@ -12,6 +12,8 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import zho.com.fw.security.WebUserDetailsService;
+
 /**
  * Security Configuration.
  */
@@ -23,10 +25,15 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
     	return NoOpPasswordEncoder.getInstance();
 	}
-    
+
 	@Bean
 	public TextEncryptor textEncryptor() {
 		return Encryptors.noOpText();
 	}
 
+	@Bean
+	public WebUserDetailsService authenticationService() {
+		return new WebUserDetailsService();
+	}
+	
 }

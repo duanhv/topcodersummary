@@ -25,6 +25,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -61,12 +62,8 @@ public class MainConfig {
 
 	@Bean
 	public DataSource dataSourceMysql() {
-		// DriverManagerDataSource factory = new EmbeddedDatabaseFactory();
-		// factory.setDatabaseName("spring-social-showcase");
-		// factory.setDatabaseType(EmbeddedDatabaseType.H2);
-		// factory.setDatabasePopulator(databasePopulator());
-		// return factory.getDatabase();
-       final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/test");
         dataSource.setUsername("root");
@@ -90,13 +87,10 @@ public class MainConfig {
 	}
 	
 	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSourceMysql());
-	}
-
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSource());
+	public HibernateTransactionManager transactionManager() {
+		HibernateTransactionManager tx = new HibernateTransactionManager();
+		tx.setSessionFactory(sessionFactory().getObject());
+		return tx;
 	}
 
 	@Bean
