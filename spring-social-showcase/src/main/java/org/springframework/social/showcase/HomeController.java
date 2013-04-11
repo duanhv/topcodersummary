@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.showcase.account.AccountRepository;
+import org.springframework.social.showcase.dao.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
