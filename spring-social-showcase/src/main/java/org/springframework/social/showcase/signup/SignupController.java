@@ -20,11 +20,11 @@ import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import org.springframework.social.showcase.account.Account;
-import org.springframework.social.showcase.account.AccountRepository;
-import org.springframework.social.showcase.account.UsernameAlreadyInUseException;
+import org.springframework.social.showcase.bean.Account;
+import org.springframework.social.showcase.exception.UsernameAlreadyInUseException;
 import org.springframework.social.showcase.message.Message;
 import org.springframework.social.showcase.message.MessageType;
+import org.springframework.social.showcase.service.AccountService;
 import org.springframework.social.showcase.signin.SignInUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -36,11 +36,11 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class SignupController {
 
-	private final AccountRepository accountRepository;
+	private final AccountService accountService;
 
 	@Inject
-	public SignupController(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
+	public SignupController(AccountService accountService) {
+		this.accountService = accountService;
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -73,10 +73,13 @@ public class SignupController {
 	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
 			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
-			accountRepository.createAccount(account);
+			accountService.addAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
+			return null;
+		} catch (Exception ex) {
+			formBinding.rejectValue("username", "user.duplicateUsername", "general exception");
 			return null;
 		}
 	}
