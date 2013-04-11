@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
 <%@ page session="false" %>
 
-<p>Welcome, <c:out value="${account.firstName}"/>!</p>
+<p>Welcome, <c:out value="${accountInfo.username}"/>!</p>
 
 <a href="<c:url value="/signout" />">Sign Out</a>
 
