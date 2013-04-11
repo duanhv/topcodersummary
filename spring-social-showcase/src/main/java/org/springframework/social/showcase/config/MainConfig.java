@@ -40,7 +40,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.social.showcase.account.JdbcAccountRepository;
+import org.springframework.social.showcase.dao.AccountRepositoryImpl;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -115,10 +115,10 @@ public class MainConfig {
 	}
 
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
+	public AnnotationSessionFactoryBean sessionFactory() {
 		final AnnotationSessionFactoryBean sessionFactory = new AnnotationSessionFactoryBean();
 		sessionFactory.setDataSource(this.dataSourceMysql());
-		sessionFactory.setPackagesToScan(new String[]{"org.springframework.social.showcase.account"});
+		sessionFactory.setPackagesToScan(new String[]{"org.springframework.social.showcase.bean"});
 		sessionFactory.setHibernateProperties(this.hibernateProperties());
 
 		return sessionFactory;
