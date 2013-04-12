@@ -18,8 +18,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -28,7 +26,6 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -45,29 +42,15 @@ public class MainConfig {
 	@Inject
 	private Environment environment;
 
-	@Value("${jdbc.driverClassName}")
-	private String driverClassName;
-
-	@Value("${jdbc.databaseurl}")
-	private String url;
-
-	@Value("${hibernate.dialect}")
-	String hibernateDialect;
-
-	@Value("${hibernate.show_sql}")
-	boolean hibernateShowSql;
-
-	@Value("${hibernate.hbm2ddl.auto}")
-	String hibernateHbm2ddlAuto;
-
 	@Bean
 	public DataSource dataSourceMysql() {
 
+		
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
+        dataSource.setUrl(environment.getProperty("jdbc.databaseurl"));
+        dataSource.setUsername(environment.getProperty("jdbc.username"));
+        dataSource.setPassword(environment.getProperty("jdbc.password"));
         return dataSource;
 	}
 
@@ -104,7 +87,7 @@ public class MainConfig {
 	}
 
 	@Bean
-	public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
+	public static PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
@@ -113,8 +96,8 @@ public class MainConfig {
 	final Properties hibernateProperties() {
 		return new Properties() {
 			{
-				this.put("persistence.dialect", "org.hibernate.dialect.MySQLDialect");
-				this.put("hibernate.show_sql", "true");
+				this.put("persistence.dialect", environment.getProperty("jdbc.dialect"));
+				this.put("hibernate.show_sql",  environment.getProperty("jdbc.show_sql"));
 			}
 		};
 	}
