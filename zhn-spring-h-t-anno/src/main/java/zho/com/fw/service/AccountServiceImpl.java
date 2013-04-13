@@ -6,28 +6,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import zho.com.fw.bean.Account;
-import zho.com.fw.dao.AccountRepo;
-import zho.com.fw.info.AccountInfo;
+import zho.com.fw.bean.CustomerBean;
+import zho.com.fw.dao.CustomerDao;
+import zho.com.fw.info.Customer;
 
 @Service
 @Transactional
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
-	private AccountRepo accountRepository;
+	private CustomerDao customerDao;
 	
-	public void addAccount(Account account) throws Exception {
-		
-		accountRepository.createAccount(account);
-		
+	public void createCustomer(Customer customer) throws Exception {
+		CustomerBean customerBean = new CustomerBean();
+		BeanUtils.copyProperties(customer, customerBean);
+		customerDao.createCustomer(customerBean);		
 	}
 	
-	public AccountInfo findAccountByUsername(String username) throws Exception {
-		Account account = null;
-		account = accountRepository.findAccountByUsername(username);
+	public Customer findCustomerByUsername(String username) throws Exception {
+		CustomerBean account = null;
+		account = customerDao.findCustomerByUsername(username);
 		
-		AccountInfo accountInfo = new AccountInfo();
+		Customer accountInfo = new Customer();
 		BeanUtils.copyProperties(account, accountInfo);
 		return accountInfo;
 	}

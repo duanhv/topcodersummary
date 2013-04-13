@@ -11,7 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import zho.com.fw.info.AccountInfo;
+import zho.com.fw.info.Customer;
 import zho.com.fw.service.AccountService;
 
 /**
@@ -32,9 +32,9 @@ public class WebUserDetailsService implements IWebUserDetailsService, Initializi
 	public synchronized UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
     	final String LOCATION = "loadUserByUsername(userName:" + userName + ")";
     		WebUserDetails user = null;
-    		AccountInfo accountInfo = null;
+    		Customer accountInfo = null;
     	try {
-    		accountInfo = accountService.findAccountByUsername(userName);
+    		accountInfo = accountService.findCustomerByUsername(userName);
     		if (accountInfo == null) {    			
     			System.out.println("User not found!!!");
     			throw new UsernameNotFoundException("User not found!!!");

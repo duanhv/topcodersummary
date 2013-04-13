@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.StringUtils;
 
-import zho.com.fw.info.AccountInfo;
+import zho.com.fw.info.Customer;
 
 
 /**
@@ -25,7 +25,7 @@ public class AppWebUserDetails extends WebUserDetails {
 		String USER_ATTR = "USER";
 	}
 	
-	public AppWebUserDetails(AccountInfo accountInfo, String role) {
+	public AppWebUserDetails(Customer accountInfo, String role) {
         if (accountInfo != null) {
             // +++
         	super.addAttr(Keys.USER_ATTR, accountInfo);
@@ -44,9 +44,9 @@ public class AppWebUserDetails extends WebUserDetails {
      * 
      * @return
      */
-    public AccountInfo getUser() {
+    public Customer getUser() {
     	try {
-    		return (AccountInfo)this.getAttr(Keys.USER_ATTR);
+    		return (Customer)this.getAttr(Keys.USER_ATTR);
     	} catch (Exception e) {
     		return null;
     	}
@@ -57,7 +57,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	 */
 	@Override
 	public String getPassword() {
-		AccountInfo accountInfo = this.getUser();
+		Customer accountInfo = this.getUser();
 		return (accountInfo != null ? accountInfo.getPassword() : null);
 	}
 
@@ -66,7 +66,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	 */
 	@Override
 	public String getUsername() {
-		AccountInfo accountInfo = this.getUser();
+		Customer accountInfo = this.getUser();
 		return (accountInfo != null ? accountInfo.getUsername() : null);
 	}
 
@@ -131,7 +131,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	@Override
 	public String getUserId() {
 		// TODO Auto-generated method stub
-		AccountInfo accountInfo = this.getUser();
+		Customer accountInfo = this.getUser();
 		return (accountInfo != null ? String.valueOf(accountInfo.getId()) : null);
 	}
 }

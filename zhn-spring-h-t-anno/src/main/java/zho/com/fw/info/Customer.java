@@ -1,39 +1,28 @@
 /*
  * Copyright 2013 the original author or authors.
  */
-package zho.com.fw.bean;
+package zho.com.fw.info;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name="ACCOUNT")
-public class Account {
 
-	@Id
-	@Column(name="ID")
-	@GeneratedValue
+public class Customer implements Serializable {
+
 	private Integer id;
-	
-	@Column(name="USERNAME")
+
 	private String username;
 
-	@Column(name="PASSWORD")
 	private String password;
 
-	@Column(name="FIRSTNAME")
 	private String firstName;
 
-	@Column(name="LASTNAME")
 	private String lastName;
 
-	public Account() {
+	public Customer() {
 	}
-	
-	public Account(String username, String password, String firstName, String lastName) {
+
+	public Customer(String username, String password, String firstName,
+			String lastName) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;

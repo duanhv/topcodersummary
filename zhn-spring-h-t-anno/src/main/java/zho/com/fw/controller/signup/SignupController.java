@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import zho.com.fw.bean.Account;
+import zho.com.fw.bean.CustomerBean;
 import zho.com.fw.controller.signin.SignInUtils;
 import zho.com.fw.exception.UsernameAlreadyInUseException;
+import zho.com.fw.info.Customer;
 import zho.com.fw.message.Message;
 import zho.com.fw.message.MessageType;
 import zho.com.fw.service.AccountService;
@@ -49,10 +50,10 @@ public class SignupController {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		Account account = createAccount(form, formBinding);
-		if (account != null) {
-			SignInUtils.signin(account.getUsername());
-			ProviderSignInUtils.handlePostSignUp(account.getUsername(), request);
+		Customer customer = createCustomer(form, formBinding);
+		if (customer != null) {
+			SignInUtils.signin(customer.getUsername());
+			ProviderSignInUtils.handlePostSignUp(customer.getUsername(), request);
 			return "redirect:/";
 		}
 		return null;
@@ -60,11 +61,11 @@ public class SignupController {
 
 	// internal helpers
 	
-	private Account createAccount(SignupForm form, BindingResult formBinding) {
+	private Customer createCustomer(SignupForm form, BindingResult formBinding) {
 		try {
-			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
-			accountService.addAccount(account);
-			return account;
+			Customer customer = new Customer(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
+			accountService.createCustomer(customer);
+			return customer;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
 			return null;

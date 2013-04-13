@@ -1,12 +1,11 @@
 package zho.com.fw.service;
 
-import zho.com.fw.bean.Account;
-import zho.com.fw.info.AccountInfo;
+import zho.com.fw.info.Customer;
 
 public interface AccountService {
 	
-	public void addAccount(Account account) throws Exception;
+	public void createCustomer(Customer customer) throws Exception;
 	
-	public AccountInfo findAccountByUsername(String username) throws Exception;
+	public Customer findCustomerByUsername(String username) throws Exception;
 		
 }

@@ -33,7 +33,7 @@ public class HomeController {
 	public String home(Principal currentUser, Model model) throws Exception {
 		System.out.println("Test HomeController: " + this);
 		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-		model.addAttribute(accountService.findAccountByUsername(currentUser.getName()));
+		model.addAttribute(accountService.findCustomerByUsername(currentUser.getName()));
 		return "home";
 	}
 	

@@ -9,21 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import zho.com.fw.bean.Account;
+import zho.com.fw.bean.CustomerBean;
 import zho.com.fw.exception.UsernameAlreadyInUseException;
 
 @Repository
-public class AccountRepoImpl 
-	extends HibernateDaoSupport implements AccountRepo {
+public class CustomerDaoImpl 
+	extends HibernateDaoSupport implements CustomerDao {
 
 	@Autowired
-	public AccountRepoImpl(SessionFactory sessionFactory) {
+	public CustomerDaoImpl(SessionFactory sessionFactory) {
 		setSessionFactory(sessionFactory);
 	}
 
-	public void createAccount(Account user) throws UsernameAlreadyInUseException {
+	public void createCustomer(CustomerBean user) throws UsernameAlreadyInUseException {
 		try {
 			getHibernateTemplate().save(user);
 		} catch (DuplicateKeyException e) {
@@ -31,9 +30,9 @@ public class AccountRepoImpl
 		}
 	}
 
-	public Account findAccountByUsername(String username) {
-		String queryString = "from Account as model where model.username = ?";
-		return (Account)getHibernateTemplate().find(queryString, username).get(0);
+	public CustomerBean findCustomerByUsername(String username) {
+		String queryString = "from CustomerBean as model where model.username = ?";
+		return (CustomerBean)getHibernateTemplate().find(queryString, username).get(0);
 	}
 
 }
