@@ -17,6 +17,7 @@ public class ArrayUtil {
 	
 	// Sort in DESC
 	//check 123
+	//abc xyzs
 	static int[] sortInDESC(int[] input) {
 		int[] arr = input.clone();
 		int half = arr.length/2;
